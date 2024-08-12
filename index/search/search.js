@@ -1,45 +1,64 @@
-document.getElementById('searchForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+            const typeSelect = document.getElementById('type');
+            const modelSelect = document.getElementById('model');
+            const resultsDiv = document.getElementById('results');
 
-    const model = document.getElementById('model').value;
+            typeSelect.addEventListener('change', function() {
+                const vehicleType = this.value;
+                fetch(`https://fipe.parallelum.com.br/api/v2/${vehicleType}/brands`)
+                    .then(response => response.json())
+                    .then(data => {
+                        modelSelect.innerHTML = '<option value="">Selecione uma marca</option>';
+                        data.forEach(brand => {
+                            const option = document.createElement('option');
+                            option.value = brand.id;
+                            option.textContent = brand.name;
+                            modelSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Erro ao buscar marcas:', error));
+            });
 
-    const apiUrl = `https://sua-api.com/api/modelos?nome=${encodeURIComponent(model)}`;
+            modelSelect.addEventListener('change', function() {
+                const vehicleType = typeSelect.value;
+                const brandId = this.value;
+                if (brandId) {
+                    fetch(`https://fipe.parallelum.com.br/api/v2/${vehicleType}/brands/${brandId}/models`)
+                        .then(response => response.json())
+                        .then(data => {
+                            resultsDiv.innerHTML = '<h3>Modelos disponíveis:</h3>';
+                            const list = document.createElement('ul');
+                            data.models.forEach(model => {
+                                const listItem = document.createElement('li');
+                                listItem.textContent = model.name;
+                                list.appendChild(listItem);
+                            });
+                            resultsDiv.appendChild(list);
+                        })
+                        .catch(error => console.error('Erro ao buscar modelos:', error));
+                } else {
+                    resultsDiv.innerHTML = '';
+                }
+            });
 
-    // Faz a requisição GET à API
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao fazer a requisição');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Processa os dados retornados da API
-            displayResults(data);
-        })
-        .catch(error => {
-            console.error('Erro:', error);
+            document.getElementById('searchForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const vehicleType = typeSelect.value;
+                const brandId = modelSelect.value;
+                if (vehicleType && brandId) {
+                    fetch(`https://fipe.parallelum.com.br/api/v2/${vehicleType}/brands/${brandId}/models`)
+                        .then(response => response.json())
+                        .then(data => {
+                            resultsDiv.innerHTML = '<h3>Modelos disponíveis:</h3>';
+                            const list = document.createElement('ul');
+                            data.models.forEach(model => {
+                                const listItem = document.createElement('li');
+                                listItem.textContent = model.name;
+                                list.appendChild(listItem);
+                            });
+                            resultsDiv.appendChild(list);
+                        })
+                        .catch(error => console.error('Erro ao buscar modelos:', error));
+                }
+            });
         });
-});
-
-// Função para exibir os resultados
-function displayResults(data) {
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = ''; // Limpa resultados anteriores
-
-    if (data.length === 0) {
-        resultsDiv.textContent = 'Nenhum modelo encontrado.';
-        return;
-    }
-
-    // Cria uma lista com os resultados
-    const ul = document.createElement('ul');
-
-    data.forEach(modelo => {
-        const li = document.createElement('li');
-        li.textContent = `Modelo: ${modelo.nome}, Preço: ${modelo.preco}`;
-        ul.appendChild(li);
-    });
-
-    resultsDiv.appendChild(ul);
-}
