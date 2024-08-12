@@ -1,0 +1,33 @@
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+form p {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+input, button {
+    margin: 5px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+input{
+    width: 20rem;
+}
+
+button {
+    cursor: pointer;
+    background-color: #14ae67;
+    border-radius: 0.2rem;
+    color: #ffffff;
+}
+
+button:hover{
+    background-color: #ffffff;
+    color: #14ae67;
+}

@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #094328;
+}
+
+a:hover{
+    color: #14ae67;
+}
+
+header{
+    display: flex;
+    box-shadow: 1px 1px 50px #535353;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+#headerImg{
+    height: 6rem;
+    width: 12rem;
+}
+
+#headerOptions ul{
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    align-items: center;
+    gap: 1rem; /* Espaçamento entre as opções */
+}
+
+#headerOptions ul li{
+    list-style: none;
+}
+
+.optionsImg img{
+    height: 2.3rem;
+    width: 2.3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+main{
+    padding: 2rem;
+}
+
+footer{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    border-top: #094328;
+}
+
+footer nav ul{
+    display: flex;
+}
+
+footer nav ul li{
+    list-style: none;
+}
+
+footer nav ul li img{
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.footerDescription{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Alinha o conteúdo verticalmente no centro */
+    margin-left: auto; /* Empurra a descrição para a direita */
+}
