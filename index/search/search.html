@@ -32,8 +32,16 @@
         <h1>Busque aqui o modelo que deseja!</h1>
         <h2>Saiba qual o perço do carro que você deseja adquirir apenas em alguns cliques:</h2>
         <form action="">
+            <p>Tipo</p>
+            <select name="type" id="type">
+                <option value="cars">Carro</option>
+                <option value="motorcycles">Motos</option>
+                <option value="trucks">Caminhões</option>
+            </select>
             <p>Modelo</p>
-            <input type="text" name="model" id="model">
+            <select name="model" id="model">
+                <option></option>
+            </select>
             <button type="submit">Pesquisar</button>
         </form>
         <div id="results"></div>
