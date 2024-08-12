@@ -59,6 +59,7 @@ footer{
     align-items: center;
     margin-bottom: 0;
     border-top: #094328;
+    box-shadow: 1px 1px 50px #C0C0C0;
 }
 
 footer nav ul{
