@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`https://fipe.parallelum.com.br/api/v2/${vehicleType}/brands`)
             .then(response => response.json())
             .then(data => {
-                brandSelect.innerHTML = '<option value="">Selecione uma marca</option>'; // Reseta o select de marcas
                 data.forEach(brand => {
                     const option = document.createElement('option');
                     option.value = brand.id;
