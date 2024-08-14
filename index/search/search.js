@@ -11,6 +11,7 @@ fetch(urlBrands)
     })
     .then(data => {
         const option = document.getElementById('model');
+        const button = document.getElementById('search');
 
         console.log(data);
 
@@ -23,7 +24,7 @@ fetch(urlBrands)
             option.appendChild(newOption);
         }
 
-        option.addEventListener("change", update);
+        button.addEventListener("change", update);
     })
     .catch(error => {
         console.error('Erro na requisição:', error);
