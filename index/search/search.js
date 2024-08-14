@@ -1,9 +1,10 @@
 const urlBrands = 'https://parallelum.com.br/fipe/api/v1/carros/marcas/';
 const urlModels = '/modelos';
 
-fetch(url)
+// Requisição para obter as marcas
+fetch(urlBrands)
     .then(response => {
-        if(!response.ok){
+        if(!response.ok) {
             throw new Error(`ERRO: retorno ${response.status}`);
         }
         return response.json();
@@ -13,11 +14,10 @@ fetch(url)
 
         console.log(data);
 
-        for(let createOptions of data){
+        for(let createOptions of data) {
             console.log(createOptions);
-            
+
             let newOption = document.createElement("option");
-            
             newOption.text = createOptions.nome;
             newOption.value = createOptions.codigo;
             option.appendChild(newOption);
@@ -29,17 +29,21 @@ fetch(url)
         console.error('Erro na requisição:', error);
     });
 
-function update(){
+// Função para atualizar a lista de modelos
+function update() {
     const brands = document.getElementById('model');
     const results = document.getElementById('results');
     const items = results.querySelectorAll('li');
-    moreItems.forEach(items => results.removeChild(items));
+
+    // Remove os itens da lista de resultados
+    items.forEach(item => results.removeChild(item));
 
     var id = brands.options[brands.selectedIndex].value;
 
+    // Requisição para obter os modelos da marca selecionada
     fetch(urlBrands + id + urlModels)
         .then(response => {
-            if(!response.ok){
+            if(!response.ok) {
                 throw new Error(`ERRO: retorno ${response.status}`);
             }
             return response.json();
@@ -48,9 +52,9 @@ function update(){
             const totalModels = document.getElementById('results');
             console.log(models);
 
-            for(var model of models.modelos){
+            for(var model of models.modelos) {
                 let list = document.createElement("li");
-                list.values = model["codigo"];
+                list.dataset.value = model["codigo"]; // Usando dataset para armazenar o código
                 list.innerHTML = model["nome"];
                 totalModels.appendChild(list);
             }
