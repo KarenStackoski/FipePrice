@@ -24,7 +24,7 @@ fetch(urlBrands)
             option.appendChild(newOption);
         }
 
-        button.addEventListener("change", update);
+        option.addEventListener("change", update);
     })
     .catch(error => {
         console.error('Erro na requisição:', error);
